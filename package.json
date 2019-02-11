@@ -1,0 +1,52 @@
+{
+  "name": "p-neo-common",
+  "version": "0.0.1",
+  "description": "neo common of js",
+  "keywords": [
+    "common",
+    "js",
+    "tool",
+    "eos"
+  ],
+  "homepage": "https://gitee.com/pefish/p-neo-common",
+  "bugs": "https://gitee.com/pefish/p-neo-common/issues",
+  "license": "MIT",
+  "author": "pefish",
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/pefish/p-neo-common"
+  },
+  "scripts": {
+    "build": "rm -rf lib && babel src -d lib",
+    "test": "mocha -t 20000 -R spec --compilers js:babel-core/register --require babel-polyfill src/*.test.js"
+  },
+  "dependencies": {
+    "p-js-error": "^0.0.3",
+    "p-js-utils": "^0.0.4"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "@cityofzion/neon-js": "^4.3.3"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "stage-3"
+    ],
+    "ignore": [
+      "node_modules"
+    ],
+    "env": {
+      "build": {
+        "optional": [
+          "optimisation",
+          "minification"
+        ]
+      }
+    }
+  }
+}
