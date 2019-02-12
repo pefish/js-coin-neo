@@ -18,14 +18,47 @@ export default class NeoWalletHelper extends BaseCoin {
 
   constructor () {
     super()
-
     this._networks = {
-      testnet: `TestNet`,
-      mainnet: `MainNet`,
-      coznet: `CozNet`,
-      regtest: `PrivateNet`
+      testnet: {
+        id: {
+          NEO: '',
+          GAS: ''
+        },
+        name: `TestNet`,
+      },
+      mainnet: {
+        id: {
+          NEO: 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b',
+          GAS: '602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7'
+        },
+        name: `MainNet`,
+      },
+      coznet: {
+        id: {
+          NEO: '',
+          GAS: ''
+        },
+        name: `CozNet`,
+      },
+      regtest: {
+        id: {
+          NEO: '',
+          GAS: ''
+        },
+        name: `PrivateNet`,
+      }
     }
   }
+
+  updateNetwork (networkName, data) {
+    this._networks[networkName] = data
+  }
+
+  updateNetworkAssetId (networkName, neoId, gasId) {
+    this._networks[networkName][`id`][`NEO`] = neoId
+    this._networks[networkName][`id`][`GAS`] = gasId
+  }
+
   /**
    * 由wif得到地址，testnet mainnet通用
    * @param wif
@@ -172,7 +205,7 @@ export default class NeoWalletHelper extends BaseCoin {
   }
 
   _parseNetwork (name) {
-    const networkName = this._networks[name]
+    const networkName = this._networks[name][`name`]
     if (!networkName) {
       throw new ErrorHelper(`network name error`)
     }
@@ -205,7 +238,7 @@ export default class NeoWalletHelper extends BaseCoin {
   }
 
   addNetwork (networkName, url) {
-    this._networks[networkName] = networkName
+    this._networks[networkName][`name`] = networkName
     const privateNet = new rpc.Network({
       name: networkName,
       extra: {

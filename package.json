@@ -1,6 +1,6 @@
 {
   "name": "p-neo-common",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "neo common of js",
   "keywords": [
     "common",
@@ -25,12 +25,13 @@
   },
   "dependencies": {
     "p-js-error": "^0.0.3",
-    "p-js-utils": "^0.0.4"
+    "p-js-utils": "^0.0.5"
   },
   "devDependencies": {
+    "@cityofzion/neon-js": "^4.3.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
-    "@cityofzion/neon-js": "^4.3.3"
+    "restler": "^3.4.0"
   },
   "babel": {
     "presets": [
