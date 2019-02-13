@@ -248,6 +248,10 @@ export default class NeoWalletHelper extends BaseCoin {
     Neon.add.network(privateNet, true)
   }
 
+  decodeTransaction (hex) {
+    return tx.Transaction.deserialize(hex)
+  }
+
   async sendAssets (privateKey, targetAddress, neoAmount, gasAmount, network = `testnet`) {
     network = this._parseNetwork(network)
     logger.error(network)

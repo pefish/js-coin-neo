@@ -12,6 +12,16 @@ describe('neoWalletHelper', () => {
     walletHelper = new NeoWalletHelper()
   })
 
+  it('decodeTransaction', async () => {
+    try {
+      const result = await walletHelper.decodeTransaction(`80000001e70ef0f4bcdf43c3e18376dc67dc3769bbf0451a6845b9d40ad8bea5b4435558000001eced05b797b8bdd1ebcc2e7b427d7714b6e4ef63d219655183a781fe6149acce00e1f5050000000002e0204b35331038a1ac03edf88edaece62200380141408dee3fee36d3e1cda0e97ac54e97da315afb1569208d0b04a78b3b7361ee374838e0862c56e1772d660f5c7692347f5ab40521064ff37e5348c4428af40aeee92321031a6c6fbbdf02ca351745fa86b9ba5a9452d785ac4f7fc2b7548ca2a46c4fcf4aac`)
+      logger.error('result', result)
+    } catch (err) {
+      logger.error(err)
+      assert.throws(() => {}, err)
+    }
+  })
+
   // it('getAddressFromWif', async () => {
   //   try {
   //     const result = walletHelper.getAddressFromWif('KyN5VWycg25RPMWu1Za5ajBCt6PnVmzYEUfEdYkrodPKpqZCJucf')
@@ -100,16 +110,16 @@ describe('neoWalletHelper', () => {
   //   }
   // })
   //
-  // it('getAddressFromScriptHash', async () => {
-  //   try {
-  //     const result = walletHelper.getAddressFromScriptHash('005f6fd6299c8ed650d0b712ed858a3b6bcbbbd1')
-  //     // logger.error(result)
-  //     assert.strictEqual(result, 'Aatqqnhk5T3APLPDYzCuAXuTyGEufu8LEL')
-  //   } catch (err) {
-  //     logger.error(err)
-  //     assert.throws(() => {}, err)
-  //   }
-  // })
+  it('getAddressFromScriptHash', async () => {
+    try {
+      const result = walletHelper.getAddressFromScriptHash('380022e6ecda8ef8ed03aca1381033354b20e002')
+      // logger.error(result)
+      assert.strictEqual(result, 'AG35VSTVmH1BqjfomkJeaqp2MA5hANSk3N')
+    } catch (err) {
+      logger.error(err)
+      assert.throws(() => {}, err)
+    }
+  })
   //
   // it('getAllBySeedAndIndex', async () => {
   //   try {
@@ -159,19 +169,19 @@ describe('neoWalletHelper', () => {
   //   }
   // })
 
-  it('sendAssets', async () => {
-    try {
-      const result = await walletHelper.sendAssets(
-        walletHelper.getPrivateKeyFromWif(`KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr`),
-        'Ab32mtZkkMyPfvTnGmTfgsKQDKEy7fgWs5',
-        1,
-        0.00001,
-      )
-      logger.error('result', result)
-    } catch (err) {
-      logger.error(err)
-      assert.throws(() => {}, err)
-    }
-  })
+  // it('sendAssets', async () => {
+  //   try {
+  //     const result = await walletHelper.sendAssets(
+  //       walletHelper.getPrivateKeyFromWif(`KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr`),
+  //       'Ab32mtZkkMyPfvTnGmTfgsKQDKEy7fgWs5',
+  //       1,
+  //       0.00001,
+  //     )
+  //     logger.error('result', result)
+  //   } catch (err) {
+  //     logger.error(err)
+  //     assert.throws(() => {}, err)
+  //   }
+  // })
 })
 
