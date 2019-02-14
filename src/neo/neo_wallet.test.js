@@ -12,15 +12,15 @@ describe('neoWalletHelper', () => {
     walletHelper = new NeoWalletHelper()
   })
 
-  it('decodeTransaction', async () => {
-    try {
-      const result = await walletHelper.decodeTransaction(`80000001e70ef0f4bcdf43c3e18376dc67dc3769bbf0451a6845b9d40ad8bea5b4435558000001eced05b797b8bdd1ebcc2e7b427d7714b6e4ef63d219655183a781fe6149acce00e1f5050000000002e0204b35331038a1ac03edf88edaece62200380141408dee3fee36d3e1cda0e97ac54e97da315afb1569208d0b04a78b3b7361ee374838e0862c56e1772d660f5c7692347f5ab40521064ff37e5348c4428af40aeee92321031a6c6fbbdf02ca351745fa86b9ba5a9452d785ac4f7fc2b7548ca2a46c4fcf4aac`)
-      logger.error('result', result)
-    } catch (err) {
-      logger.error(err)
-      assert.throws(() => {}, err)
-    }
-  })
+  // it('decodeTransaction', async () => {
+  //   try {
+  //     const result = await walletHelper.decodeTransaction(`80000001e70ef0f4bcdf43c3e18376dc67dc3769bbf0451a6845b9d40ad8bea5b4435558000001eced05b797b8bdd1ebcc2e7b427d7714b6e4ef63d219655183a781fe6149acce00e1f5050000000002e0204b35331038a1ac03edf88edaece62200380141408dee3fee36d3e1cda0e97ac54e97da315afb1569208d0b04a78b3b7361ee374838e0862c56e1772d660f5c7692347f5ab40521064ff37e5348c4428af40aeee92321031a6c6fbbdf02ca351745fa86b9ba5a9452d785ac4f7fc2b7548ca2a46c4fcf4aac`)
+  //     logger.error('result', result)
+  //   } catch (err) {
+  //     logger.error(err)
+  //     assert.throws(() => {}, err)
+  //   }
+  // })
 
   // it('getAddressFromWif', async () => {
   //   try {
@@ -110,27 +110,27 @@ describe('neoWalletHelper', () => {
   //   }
   // })
   //
-  it('getAddressFromScriptHash', async () => {
-    try {
-      const result = walletHelper.getAddressFromScriptHash('380022e6ecda8ef8ed03aca1381033354b20e002')
-      // logger.error(result)
-      assert.strictEqual(result, 'AG35VSTVmH1BqjfomkJeaqp2MA5hANSk3N')
-    } catch (err) {
-      logger.error(err)
-      assert.throws(() => {}, err)
-    }
-  })
-  //
-  // it('getAllBySeedAndIndex', async () => {
+  // it('getAddressFromScriptHash', async () => {
   //   try {
-  //     const result = walletHelper.getAllBySeedAndIndex('da2a48a1b9fbade07552281143814b3cd7ba4b53a7de5241439417b9bb540e229c45a30b0ce32174aaccc80072df7cbdff24f0c0ae327cd5170d1f276b890173', 1)
+  //     const result = walletHelper.getAddressFromScriptHash('380022e6ecda8ef8ed03aca1381033354b20e002')
   //     // logger.error(result)
-  //     assert.strictEqual(result['address'], 'AKnxfJidqBpPLLUuUoK4mwudqRkqB72Xpm')
+  //     assert.strictEqual(result, 'AG35VSTVmH1BqjfomkJeaqp2MA5hANSk3N')
   //   } catch (err) {
   //     logger.error(err)
   //     assert.throws(() => {}, err)
   //   }
   // })
+
+  it('getAllBySeedAndIndex', async () => {
+    try {
+      const result = walletHelper.getAllBySeedAndIndex('da2a48a1b9fbade07552281143814b3cd7ba4b53a7de5241439417b9bb540e229c45a30b0ce32174aaccc80072df7cbdff24f0c0ae327cd5170d1f276b890173', 1)
+      logger.error(result)
+      assert.strictEqual(result['address'], 'AKnxfJidqBpPLLUuUoK4mwudqRkqB72Xpm')
+    } catch (err) {
+      logger.error(err)
+      assert.throws(() => {}, err)
+    }
+  })
 
   // it('isAddress', async () => {
   //   try {
@@ -143,19 +143,17 @@ describe('neoWalletHelper', () => {
   //   }
   // })
 
-  // it('getAssertIdByName', async () => {
+  // it('getAssetIdByCurrency', async () => {
   //   try {
-  //     const result = walletHelper.getAssertIdByName('NEO')
-  //     const result1 = walletHelper.getAssertIdByName('NEO1')
+  //     const result = walletHelper.getAssetIdByCurrency('NEO')
   //     // logger.error('result', result)
   //     assert.strictEqual(result, 'c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b')
-  //     assert.strictEqual(result1, null)
   //   } catch (err) {
   //     logger.error(err)
   //     assert.throws(() => {}, err)
   //   }
   // })
-  //
+
   // it('getNameByAssertId', async () => {
   //   try {
   //     const result = walletHelper.getNameByAssertId('c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b')
