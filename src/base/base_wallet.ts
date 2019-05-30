@@ -6,11 +6,15 @@ import Neon, {
   tx,
 } from '@cityofzion/neon-js'
 import BaseCoin from '../base/base_coin'
-import CryptUtil from 'p-js-utils/lib/crypt'
-import ErrorHelper from 'p-js-error'
+import CryptUtil from '@pefish/js-utils/lib/crypt'
+import ErrorHelper from '@pefish/js-error'
 
 
 export default class BaseNeoWalletHelper extends BaseCoin {
+
+  _networks: any
+  _mainCurrency: string
+  _assets: any
 
   constructor () {
     super()
@@ -27,7 +31,7 @@ export default class BaseNeoWalletHelper extends BaseCoin {
   }
 
   getCurrencyByAssetId (assetId) {
-    for (let [currency, assetId_] of Object.entries(this._assets)) {
+    for (const [currency, assetId_] of Object.entries(this._assets)) {
       if (assetId === assetId_) {
         return currency
       }
@@ -70,47 +74,18 @@ export default class BaseNeoWalletHelper extends BaseCoin {
     return account.publicKey
   }
 
-  /**
-   * 使用密码加密wif成nep2密文string
-   * @param wif
-   * @param password
-   * @param opts
-   * @returns {string}
-   */
-  encryptWif (wif, password, opts = {
-    cost: 16384,
-    blockSize: 8,
-    parallel: 8,
-    size: 64
-  }) {
+  async encryptWif (wif, password) {
     const account = new wallet.Account(wif)
-    return account.encrypt(password, opts).encrypted
+    return (await account.encrypt(password)).encrypted
   }
 
-  /**
-   * 使用密码解密nep2密文string成wif
-   * @param nep2Str
-   * @param password
-   * @param opts
-   * @returns {string}
-   */
-  decryptToWif (nep2Str, password, opts = {
-    cost: 16384,
-    blockSize: 8,
-    parallel: 8,
-    size: 64
-  }) {
+  async decryptToWif (nep2Str, password) {
     const account = new wallet.Account(nep2Str)
-    return account.decrypt(password, opts).WIF
+    return (await account.decrypt(password)).WIF
   }
 
-  decryptNep2 (nep2Str, password, opts = {
-    cost: 16384,
-    blockSize: 8,
-    parallel: 8,
-    size: 64
-  }) {
-    return this.decryptToWif(nep2Str, password, opts)
+  async decryptNep2 (nep2Str, password) {
+    return await this.decryptToWif(nep2Str, password)
   }
 
   getScriptHashFromAddress (address) {
@@ -147,7 +122,7 @@ export default class BaseNeoWalletHelper extends BaseCoin {
   getAllBySeedAndIndex (seed, index) {
     const sha256 = CryptUtil.sha256ToHex(seed + index)
     const arr = sha256.toArray(2).map((hexStr) => {
-      return hexStr.hexToNumber()
+      return hexStr.hexToNumber_()
     })
     const privateKey = u.ab2hexstring(arr)
     const account = new wallet.Account(privateKey)
@@ -217,23 +192,14 @@ export default class BaseNeoWalletHelper extends BaseCoin {
 
   async sendAssets (privateKey, targetAddress, neoAmount, gasAmount, network = `testnet`) {
     network = this._parseNetwork(network)
-    logger.error(network)
 
     const intent = api.makeIntent({ [this._mainCurrency]: neoAmount, GAS: gasAmount }, targetAddress)
 
-    console.log("\n\n--- Intents ---")
     intent.forEach(i => console.log(i))
 
     const apiProvider = new api.neoscan.instance(network)
 
-    console.log("\n\n--- API Provider ---")
-    console.log(apiProvider)
-
     const account = new wallet.Account(privateKey);
-
-    console.log("\n\n--- Sending Address ---");
-    console.log(account);
-
     const config = {
       api: apiProvider, // The network to perform the action, MainNet or TestNet.
       account: account, // This is the address which the assets come from.

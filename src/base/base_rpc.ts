@@ -4,11 +4,14 @@ import Neon, {
 import RpcRequester from '../rpc_requester'
 
 export default class BaseNeoRpcHelper extends RpcRequester {
+
+  _client: any
+
   constructor (url) {
     super({
       url
     })
-    this._client = Neon.create.rpcClient(url)
+    this._client = Neon.create.rpcClient(url, `MainNet`)
   }
 
   getClient () {
@@ -26,7 +29,7 @@ export default class BaseNeoRpcHelper extends RpcRequester {
   async getAccountBalance (address, assetId) {
     const accountState = await this._client.getAccountState(address)
     const balances = accountState[`balances`]
-    for (let balance of balances) {
+    for (const balance of balances) {
       if (balance[`asset`] === assetId) {
         return balance[`value`]
       }

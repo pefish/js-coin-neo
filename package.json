@@ -1,6 +1,6 @@
 {
-  "name": "p-neo-common",
-  "version": "0.0.11",
+  "name": "@pefish/js-coin-neo",
+  "version": "0.2.1",
   "description": "neo common of js",
   "keywords": [
     "common",
@@ -8,8 +8,8 @@
     "tool",
     "eos"
   ],
-  "homepage": "https://gitee.com/pefish/p-neo-common",
-  "bugs": "https://gitee.com/pefish/p-neo-common/issues",
+  "homepage": "https://github.com/pefish/js-coin-neo",
+  "bugs": "https://github.com/pefish/js-coin-neo/issues",
   "license": "MIT",
   "author": "pefish",
   "engines": {
@@ -17,37 +17,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/pefish/p-neo-common"
+    "url": "https://github.com/pefish/js-coin-neo"
   },
   "scripts": {
-    "build": "rm -rf lib && babel src -d lib",
-    "test": "mocha -t 20000 -R spec --compilers js:babel-core/register --require babel-polyfill src/*.test.js"
+    "test": "mocha --timeout 6000 --require ts-node/register src/wallet.test.ts",
+    "build": "rm -rf lib types && tsc && yarn tslint",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "prepublish": "yarn build"
   },
   "dependencies": {
-    "p-js-error": "^0.0.3",
-    "p-js-utils": "^0.0.5"
+    "@cityofzion/neon-js": "^4.5.2",
+    "@pefish/js-error": "^0.0.5",
+    "@pefish/js-node-assist": "^0.6.0",
+    "@pefish/js-util-httprequest": "^0.0.5",
+    "@pefish/js-utils": "^0.0.9"
   },
   "devDependencies": {
-    "@cityofzion/neon-js": "^4.3.3",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1",
-    "restler": "^3.4.0"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "stage-3"
-    ],
-    "ignore": [
-      "node_modules"
-    ],
-    "env": {
-      "build": {
-        "optional": [
-          "optimisation",
-          "minification"
-        ]
-      }
-    }
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.13.7",
+    "ts-node": "^8.1.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   }
 }

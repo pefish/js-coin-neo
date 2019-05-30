@@ -1,6 +1,6 @@
-import 'node-assist'
-import assert from "assert"
-import NeoRpcHelper from './neo_rpc'
+import '@pefish/js-node-assist'
+import * as assert from 'assert'
+import NeoRpcHelper from './rpc'
 
 describe('neoRpcHelper', () => {
 
@@ -59,10 +59,10 @@ describe('neoRpcHelper', () => {
   it('getAccountBalance', async () => {
     try {
       const result = await helper.getAccountBalance(`AKnxfJidqBpPLLUuUoK4mwudqRkqB72Xpm`, `0xceac4961fe81a783516519d263efe4b614777d427b2eccebd1bdb897b705edec`)
-      logger.error('2', result)
+      global.logger.error('2', result)
       // assert.notStrictEqual(result, undefined)
     } catch (err) {
-      logger.error(err)
+      global.logger.error(err)
       assert.throws(() => {}, err)
     }
   })
