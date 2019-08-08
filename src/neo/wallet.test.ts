@@ -123,7 +123,7 @@ describe('neoWalletHelper', () => {
 
   it('getAllBySeedAndIndex', async () => {
     try {
-      const result = walletHelper.getAllBySeedAndIndex('da2a48a1b9fbade07552281143814b3cd7ba4b53a7de5241439417b9bb540e229c45a30b0ce32174aaccc80072df7cbdff24f0c0ae327cd5170d1f276b890173', 1)
+      const result = walletHelper.getAllBySeedAndIndex('', 1)
       global.logger.error(result)
       assert.strictEqual(result['address'], 'AKnxfJidqBpPLLUuUoK4mwudqRkqB72Xpm')
     } catch (err) {

@@ -1,6 +1,6 @@
 {
   "name": "@pefish/js-coin-neo",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "neo common of js",
   "keywords": [
     "common",
@@ -21,16 +21,16 @@
   },
   "scripts": {
     "test": "mocha --timeout 6000 --require ts-node/register src/wallet.test.ts",
-    "build": "rm -rf lib types && tsc && yarn tslint",
-    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "t": "mocha --timeout 6000 --require ts-node/register",
+    "build": "rm -rf lib types && tsc",
     "prepublish": "yarn build"
   },
   "dependencies": {
     "@cityofzion/neon-js": "^4.5.2",
-    "@pefish/js-error": "^0.0.5",
-    "@pefish/js-node-assist": "^0.6.0",
-    "@pefish/js-util-httprequest": "^0.0.5",
-    "@pefish/js-utils": "^0.0.9"
+    "@pefish/js-error": "^0.1.1",
+    "@pefish/js-node-assist": "^0.6.7",
+    "@pefish/js-util-crypto": "^0.0.9",
+    "@pefish/js-util-httprequest": "^0.0.9"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

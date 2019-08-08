@@ -30,7 +30,7 @@ export default class BaseNeoWalletHelper extends BaseCoin {
     getAllBySeedAndIndex(seed: any, index: any): {
         seed: any;
         index: any;
-        sha256: any;
+        sha256: string;
         privateKey: string;
         publicKey: string;
         address: string;

@@ -6,7 +6,7 @@ import Neon, {
   tx,
 } from '@cityofzion/neon-js'
 import BaseCoin from '../base/base_coin'
-import CryptUtil from '@pefish/js-utils/lib/crypt'
+import CryptUtil from '@pefish/js-util-crypto'
 import ErrorHelper from '@pefish/js-error'
 
 
@@ -93,26 +93,6 @@ export default class BaseNeoWalletHelper extends BaseCoin {
     return account.scriptHash
   }
 
-  // getPrivateKeyBySeedAndIndex (seed, index) {
-  //   const md5 = CryptUtil.md5(seed + index)
-  //   const md5TwoArr = CryptUtil.md5(md5).toArray(2)
-  //   const targetArr = md5TwoArr.append(md5.toArray(2))
-  //   const arr = targetArr.map((hexStr) => {
-  //     return hexStr.hexToNumber()
-  //   })
-  //   const privateKey = u.ab2hexstring(arr)
-  //   const account = new wallet.Account(privateKey)
-  //   return {
-  //     seed,
-  //     index,
-  //     privateKey,
-  //     publicKey: account.publicKey,
-  //     address: account.address,
-  //     wif: account.WIF,
-  //     scriptHash: account.scriptHash
-  //   }
-  // }
-
   /**
    * 获取地址、私钥等
    * @param seed {string} 种子
@@ -121,7 +101,7 @@ export default class BaseNeoWalletHelper extends BaseCoin {
    */
   getAllBySeedAndIndex (seed, index) {
     const sha256 = CryptUtil.sha256ToHex(seed + index)
-    const arr = sha256.toArray(2).map((hexStr) => {
+    const arr = sha256.toArray_(2).map((hexStr) => {
       return hexStr.hexToNumber_()
     })
     const privateKey = u.ab2hexstring(arr)
