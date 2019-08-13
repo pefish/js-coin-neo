@@ -2,20 +2,21 @@ import Neon, {
   rpc,
 } from '@cityofzion/neon-js'
 import RpcRequester from '../rpc_requester'
+import { RPCClient } from '@cityofzion/neon-core/lib/rpc';
 
 export default class BaseNeoRpcHelper extends RpcRequester {
 
-  _client: any
+  client: RPCClient
 
   constructor (url) {
     super({
       url
     })
-    this._client = Neon.create.rpcClient(url, `MainNet`)
+    this.client = Neon.create.rpcClient(url, `MainNet`)
   }
 
-  getClient () {
-    return this._client
+  getClient (): RPCClient {
+    return this.client
   }
 
   async getNewAddress () {
@@ -27,7 +28,7 @@ export default class BaseNeoRpcHelper extends RpcRequester {
   }
 
   async getAccountBalance (address, assetId) {
-    const accountState = await this._client.getAccountState(address)
+    const accountState = await this.client.getAccountState(address)
     const balances = accountState[`balances`]
     for (const balance of balances) {
       if (balance[`asset`] === assetId) {

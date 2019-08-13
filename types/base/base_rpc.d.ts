@@ -1,8 +1,9 @@
 import RpcRequester from '../rpc_requester';
+import { RPCClient } from '@cityofzion/neon-core/lib/rpc';
 export default class BaseNeoRpcHelper extends RpcRequester {
-    _client: any;
+    client: RPCClient;
     constructor(url: any);
-    getClient(): any;
+    getClient(): RPCClient;
     getNewAddress(): Promise<any>;
     getWalletBalance(assetId: any): Promise<any>;
     getAccountBalance(address: any, assetId: any): Promise<any>;
